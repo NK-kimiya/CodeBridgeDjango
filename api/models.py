@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.conf import settings
 import uuid
 import os
+from cloudinary.models import CloudinaryField
 # Create your models here.
 def load_path_video(instance, filename):
     ext = filename.split('.')[-1]
@@ -54,7 +55,7 @@ class Repository(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    demo_video = models.FileField(blank=True, null=True, upload_to=load_path_video)
+    demo_video = CloudinaryField(resource_type='video', blank=True, null=True)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="repositories")
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="repositories")
     categories = models.ManyToManyField("Category", related_name="repositories")
