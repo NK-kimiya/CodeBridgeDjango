@@ -74,10 +74,17 @@ class RepositorySerializer(serializers.ModelSerializer):
     categories = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(), many=True, required=False
     )
+    
+    demo_video_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Repository
-        fields = ['id', 'url', 'title', 'description', 'demo_video', 'room', 'owner', 'categories']
+        fields = [
+            'id', 'url', 'title', 'description',
+            'demo_video',       # ←そのまま残す
+            'demo_video_url',   # ←追加
+            'room', 'owner', 'categories'
+        ]
         extra_kwargs = {
             'owner': {'read_only': True}  # `owner` は自動で設定するのでリクエスト不要
         }
