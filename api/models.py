@@ -9,7 +9,7 @@ from cloudinary.models import CloudinaryField
 # Create your models here.
 def load_path_video(instance, filename):
     ext = filename.split('.')[-1]
-    return f"video/{uuid.uuid4()}.{ext}"
+    return f"uploads/{uuid.uuid4()}.{ext}"
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):

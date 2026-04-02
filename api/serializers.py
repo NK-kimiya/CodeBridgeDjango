@@ -88,6 +88,14 @@ class RepositorySerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'owner': {'read_only': True}  # `owner` は自動で設定するのでリクエスト不要
         }
+        
+    def get_demo_video_url(self, obj):
+        if obj.demo_video:
+            try:
+                return obj.demo_video.url
+            except:
+                return None
+        return None
 
     def create(self, validated_data):
         """リポジトリ作成時にカテゴリをセット"""
