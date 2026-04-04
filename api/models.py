@@ -55,6 +55,7 @@ class Repository(models.Model):
     url = models.URLField()
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    demo_video_url = models.URLField(null=True, blank=True)
     demo_video = CloudinaryField(resource_type='video', blank=True, null=True)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="repositories")
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="repositories")
